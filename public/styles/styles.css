@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    background-color: var(--bg-color);
+    font-family: "Lexend Deca", sans-serif;
+    height: 85vh; /* Make sure the body takes full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+    padding: 23px; /* Add some padding for mobile */
+    background-color: var(--bg-color);
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: var(--h1-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    color: var(--p-color);
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button {
+    background-color: var(--org-color);
+    transition: background-color 0.3s ease;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button:hover {
+    background-color: var(--org-color-hover);
+}
+
+/* Make the text and button responsive */
+@media screen and (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5em; /* Smaller font sizw for tablet devices */
+    }
+
+    .hero-content p {
+        font-size: 1em;
+        margin-bottom: 30px;
+    }
+
+    .cta-button {
+        padding: 10px 20px; /* Adjust padding for smaller screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8em; /* Smaller font for mobile devices */
+    }
+
+    .hero-content p {
+        font-size: 0.9em;
+        margin-bottom: 20px;
+    }
+
+    .cta-button {
+        padding: 8px 15px; /* Smaller padding for mobile */
+    }
+}

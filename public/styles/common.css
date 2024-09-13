@@ -1,0 +1,13 @@
+:root {
+ /*  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --accent-color: #e74c3c;
+  --text-color: #333;  */
+
+  --org-color: #fa6742;             /* Orange color */
+  --org-color-hover: #f45730;      /* Orange color hover*/
+  --bg-color: #f0f4f8;       /* Lightest grey */
+  --h1-color: #34445c;       /* Dark blue color */
+  --p-color: #6e7a8a;        /* Grey color */
+  --p-color-from: #4e4e4e;
+}
