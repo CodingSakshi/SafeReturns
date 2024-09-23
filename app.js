@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: false}));             // To parse form data
 
 
+
 // Routes
 app.get('/', function(req, res) {
     res.render('index'); 
@@ -21,6 +22,18 @@ app.get('/login', function(req, res) {
 
 app.get('/signup', function(req, res) {
     res.render('signup'); 
+});
+
+app.get('/about', function(req, res) {
+    res.render('about'); 
+});
+
+app.get('/technologies', function(req, res) {
+    res.render('technologies'); 
+});
+
+app.get('/contact-us', function(req, res) {
+    res.render('contact-us'); 
 });
 
 app.get('/terms-and-conditions', function(req, res) {
