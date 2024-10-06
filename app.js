@@ -24,6 +24,10 @@ app.get('/signup', function(req, res) {
     res.render('signup'); 
 });
 
+app.get('/report', function(req, res) {
+    res.render('report'); 
+});
+
 app.get('/about', function(req, res) {
     res.render('about'); 
 });
