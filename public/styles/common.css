@@ -44,13 +44,29 @@ nav {
   padding: 15px 0px;
 }
 
-nav a {
+nav a, nav form button  {
   color: #2e475d;
   font-family: "Lexend Deca", sans-serif;
   text-decoration: none;
   transition: color 0.3s ease;
   margin: 0 14px;
   font-size: 15px;
+}
+
+nav form button {
+  background: none;        /* Removes the background color */
+  border: none;            /* Removes the border/outline */
+  padding: 0;              /* Removes padding */
+  cursor: pointer;         /* Makes the cursor appear as a pointer (hand icon) */
+}
+
+nav form button:focus {
+  outline: none;           /* Removes the focus outline when clicked */
+}
+
+nav form button:hover {
+  text-decoration: underline; /* Optional: Adds an underline on hover to mimic text links */
+  color: #fa6742;
 }
 
 nav a:hover {

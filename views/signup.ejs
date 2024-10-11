@@ -11,46 +11,52 @@
 
 </head>
 <body>
+    <%- include("include/nav") %>
+    <div class="main-container">
     <section class="signup-section">
         <div class="signup-form">
             <h2>SignUp to SafeReturns</h2>
-            <form action="/submit-signup" method="POST">
+            <form action="/signup" method="POST">
                 <div class="form-group">
                     <label for="username">Create a Username<span class="required">*</span></label>
-                    <p class="username-warning">⚠️ This username is already taken!</p>
-                    <input type="text" id="username" name="username" required>
+                    <% if(inputData.usernameError) { %>
+                        <p class="username-warning">⚠️ This username is already taken!</p>
+                    <% } %>
+                    <input type="text" id="username" name="username" value="<%= inputData.username %>" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Set a Password<span class="required">*</span></label>
-                    <input type="password" id="password" name="password" required minlength="6">
+                    <input type="password" id="password" name="password" value="<%= inputData.password %>" required minlength="6">
                 </div>
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Your Password<span class="required">*</span></label>
-                    <p class="pass-warning">⚠️ Password do not match!</p>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <% if(inputData.passwordError) { %>
+                        <p class="pass-warning">⚠️ Password do not match!</p>
+                    <% } %>
+                    <input type="password" id="confirmPassword" name="confirmPassword" value="<%= inputData.confirmPassword %>" required>
                 </div>
                 <div class="form-group">
                     <label for="fullname">Full Name or Organization Name<span class="required">*</span></label>
-                    <input type="text" id="fullname" name="fullname" required>
+                    <input type="text" id="fullname" name="fullname" value="<%= inputData.fullname %>" required>
                 </div>
                 <fieldset>
                     <p class="question-label">Type of User<span class="required">*</span></p>
                     <div class="radio-group">
-                        <!-- <div class="radio-subgroup"> -->
-                            <input type="radio" name="userType" value="individual" id="individual" required> 
-                            <label for="individual">Individual</label> 
-                        <!-- </div> -->
-                        <!-- <div class="radio-subgroup"> -->
-                            <input type="radio" name="userType" value="ngo" id="NGO" required> 
-                            <label for="NGO">NGO</label> 
-                        <!-- </div> -->
-                        <!-- <div class="radio-subgroup"> -->
-                            <input type="radio" name="userType" value="police" id="police-station" required>
-                            <label for="police-station">Police Station</label>
-                        <!-- </div> -->
+                        <input type="radio" name="userType" value="individual" id="individual" 
+                            <%= inputData.userType === 'individual' ? 'checked' : '' %> required> 
+                        <label for="individual">Individual</label> 
+                
+                        <input type="radio" name="userType" value="ngo" id="NGO" 
+                            <%= inputData.userType === 'ngo' ? 'checked' : '' %> required> 
+                        <label for="NGO">NGO</label> 
+                
+                        <input type="radio" name="userType" value="police" id="police-station" 
+                            <%= inputData.userType === 'police' ? 'checked' : '' %> required>
+                        <label for="police-station">Police Station</label>
                     </div>
                 </fieldset>
-                <div class="form-group">
+                
+                <!-- <div class="form-group">
                     <label for="email">Email Address (for updates)<span class="required">*</span></label>
                     <input type="email" id="email" name="email" required>
                 </div>
@@ -61,11 +67,11 @@
                 <div class="form-group">
                     <label for="address">Permanent Address<span class="required">*</span></label>
                     <textarea id="address" name="address" rows="3" required></textarea>
-                </div>
+                </div> -->
 
                 <fieldset>
                     <div class="checkbox">
-                        <input type="checkbox" name="terms" id="terms-and-conditions" required>
+                        <input type="checkbox" name="terms" id="terms-and-conditions" required <% if(inputData.terms) { %> checked <% } %>>
                         <label class="checkbox-label" for="terms-and-conditions">I agree to the <a href="/terms-and-conditions" target="_blank">Terms and Conditions</a><span class="required">*</span></label>
                     </div>
                 </fieldset>
@@ -79,5 +85,6 @@
             </p>
         </div>
     </section>
+    </div>
 </body>
 </html>

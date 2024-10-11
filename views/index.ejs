@@ -17,7 +17,13 @@
             <h1>SafeReturns</h1>
             <h3>Together, We Can Bring Them Back</h3>
             <p>SafeReturns empowers communities, NGOs, and police stations with an easy-to-use platform for finding and matching missing persons. Leveraging age-progressive facial recognition, we help locate individuals, even when years have passed. Your participation can change lives—join the effort to bring families back together.</p>
-            <a href="/signup" class="">Get Started ></a>
+
+            <% if (isAuthenticated) { %>
+                <a href="/report">Get Started ></a>
+            <% } else { %>
+                <a href="/signup" class="">Get Started ></a>
+            <% } %>
+    
         </div>
     </div>
     

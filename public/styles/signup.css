@@ -1,11 +1,18 @@
 body {
     margin: 0;
-    font-family: "Roboto", sans-serif;
-    background-color: var(--bg-color);
+    /* font-family: "Roboto", sans-serif; */
+    /* background-color: var(--bg-color); */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
 
+/* header {
+    position: relative;
+} */
+
+
+
 .signup-section {
-    background-color: var(--bg-color);
+    /* background-color: var(--bg-color); */
     padding: 40px 20px;
     text-align: center;
 }
@@ -21,8 +28,8 @@ body {
 }
 
 .signup-form h2 {
-    font-family: "Roboto Condensed", sans-serif;
-    color: var(--h1-color);
+    font-family: inherit;
+    color: #fa6742; ;
     margin-bottom: 20px;
 }
 
@@ -60,6 +67,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: 100%;
+    font: inherit;
 }
 
 .submit-button:hover {
@@ -97,6 +105,7 @@ a:hover {
 
 input {
     color: var(--p-color-from);
+    font-family: inherit;
 }
 
 input:focus, textarea:focus{
@@ -106,6 +115,8 @@ input:focus, textarea:focus{
 
 textarea {
     margin: 0;
+    font: inherit;
+    font-size: 14px;
 }
 
 /* 
@@ -168,5 +179,41 @@ fieldset {
     clear: none;
     margin: 2px 0 0 2px;
   }
+
+  /* Style for the file input */
+.form-group input[type="file"] {
+    width: 100%;             /* Full width to match other inputs */
+    padding: 10px;           /* Padding for spacing */
+    border: 1px solid #ccc;  /* Same border as text inputs */
+    border-radius: 5px;      /* Rounded corners like other inputs */
+    box-sizing: border-box;  /* Include padding in the element's width/height */
+    color: var(--p-color);   /* Text color to match other inputs */
+    font-family: inherit;    /* Inherit font family for consistency */
+    background-color: white; /* Background color for file input */
+}
+
+
+
+/* Optional: Hide the default file input style and customize it */
+input[type="file"]::file-selector-button {
+    background-color: #fa6742;
+    color: #fff;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: inherit;
+    margin-right: 8px;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #f45730; /* Change background on hover */
+}
+
+
+
+
+
 
 

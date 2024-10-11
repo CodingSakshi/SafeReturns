@@ -5,11 +5,22 @@
 
     <nav>
         <a href="/">Home</a>
+
+        <% if (isAuthenticated) { %>
+            <a href="/report">Report Case</a>
+            <a href="/profile">Profile</a>
+        <% } else { %>
+            <a href="/login">Login</a>
+        <% } %>
+
         <a href="/about">About</a>
         <a href="/technologies">Technologies</a>
         <a href="/contact-us">Contact Us</a>
-        <!-- <a href="/testimonals">Testimonals</a> -->
-        <a href="/login">Login</a>
+        <% if (isAuthenticated) { %>
+            <form action="/logout" method="POST">
+                <button>Logout</button>
+            </form>
+        <% }  %>
     </nav>
 
     <!-- Hamburger Icon for smaller screens -->
@@ -22,10 +33,21 @@
     <!-- Dropdown menu for mobile navigation -->
     <div class="nav-dropdown" id="navDropdown">
         <a href="/">Home</a>
+
+        <% if (isAuthenticated) { %>
+            <a href="/report">Report Case</a>
+            <a href="/profile">Profile</a>
+        <% } else { %>
+            <a href="/login">Login</a>
+        <% } %>
+
         <a href="/about">About</a>
         <a href="/technologies">Technologies</a>
         <a href="/contact-us">Contact Us</a>
-        <!-- <a href="/testimonals">Testimonals</a> -->
-        <a href="/login">Login</a>
+        <% if (isAuthenticated) { %>
+            <form action="/logout" method="POST">
+                <button>Logout</button>
+            </form>
+        <% }  %>
     </div>
 </header>

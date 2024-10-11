@@ -2,70 +2,102 @@
 <html lang="en">
 <head>
     <%- include("include/head") %>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
     
     <link href="/styles/common.css" rel="stylesheet">
     <link href="/styles/signup.css" rel="stylesheet">
+    <script src="/scripts/navbar.js" defer></script>
     <title>Signup</title>
 
 </head>
 <body>
     <%- include("include/nav") %>
-
+    <div class="main-container">
     <section class="signup-section">
         <div class="signup-form">
-                <h1>Report Missing or Found Person</h1>
-                <form action="/submit-report" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="fullName">Full Name</label>
-                        <input type="text" id="fullName" name="fullName" required>
+            <h2>Report Case</h2>
+            <form action="/report" method="POST" enctype="multipart/form-data">
+
+                <fieldset>
+                    <p class="question-label">Person Status<span class="required">*</span></p>
+                    <div class="radio-group">
+                        <input type="radio" name="personStatus" value="foundPerson" id="foundPerson" 
+                           required> 
+                        <label for="foundPerson">Found Person</label> 
+                
+                        <input type="radio" name="personStatus" value="missingPerson" id="missingPerson" 
+               required> 
+                        <label for="missingPerson">Missing Person</label> 
                     </div>
-        
-                    <div class="form-group">
-                        <label for="age">Approximate Age</label>
-                        <input type="number" id="age" name="age" min="1" max="120" required>
+                </fieldset>
+
+                <div class="form-group">
+                    <label for="fullname">Full Name<span class="required">*</span></label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Approximate Age<span class="required">*</span></label>
+                    <input type="age" id="age" name="age"  required >
+                </div>
+
+
+                <fieldset>
+                    <p class="question-label">Gender<span class="required">*</span></p>
+                    <div class="radio-group">
+                        <input type="radio" name="gender" value="male" id="male" 
+                   required> 
+                        <label for="male">Male</label> 
+                
+                        <input type="radio" name="gender" value="female" id="female" 
+                            required> 
+                        <label for="female">Female</label> 
+
+                        <input type="radio" name="gender" value="other" id="other" 
+                      required> 
+                        <label for="other">Other</label> 
                     </div>
-        
-                    <div class="form-group">
-                        <label for="photo">Clear Photo (JPG/PNG)</label>
-                        <input type="file" id="photo" name="photo" accept="image/*" required>
-                        <p class="image-warning">Please upload a clear photo for accurate face recognition.</p>
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="gender">Gender</label>
-                        <select id="gender" name="gender" required>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="lastSeenLocation">Last Seen Location</label>
-                        <input type="text" id="lastSeenLocation" name="lastSeenLocation" required>
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="additionalDetails">Additional Details</label>
-                        <textarea id="additionalDetails" name="additionalDetails" rows="4" placeholder="Height, weight, birthmarks, tattoos, clothing, etc." required></textarea>
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="contactInfo">Contact Info (for match notification)</label>
-                        <input type="email" id="contactInfo" name="contactInfo" placeholder="Enter your email address" required>
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="personStatus">Person Status</label>
-                        <select id="personStatus" name="personStatus" required>
-                            <option value="missing">Missing Person</option>
-                            <option value="found">Found Person</option>
-                        </select>
-                    </div>
-        
-                    <button type="submit" class="submit-button">Submit Report</button>
-                </form>
+                </fieldset>
+
+
+                <div class="form-group">
+                    <label for="lastSeen">Last Seen<span class="required">*</span></label>
+                    <textarea id="lastSeen" name="lastSeen" rows="3"  placeholder="Last Seen Location (City, Area)" required></textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="additionalDetails">Additonal Details<span class="required">*</span></label>
+                    <textarea id="additionalDetails" name="additionalDetails" rows="3" placeholder="Additonal Details Like Bithmarks, Scars, Tattoos, Height, Weight, Blood Group " required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Person Image<span class="required">*</span></label>
+                    <input type="file" id="image" name="image" required accept="image/*">    <!-- to allow all image files -->   
+                </div>
+
+                <p style="color: #fa6742; ; padding-bottom: 15px;"><strong>Contact Information: </strong>To connect if any match is found!</p>
+
+                <div class="form-group">
+                    <label for="email">Email Address<span class="required">*</span></label>
+                    <input type="email" id="email" name="email"  required >
+                </div>
+
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number<span class="required">*</span></label>
+                    <input type="tel" id="contactNumber" name="contactNumber" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="permanentAddress">Permanent Address<span class="required">*</span></label>
+                    <textarea id="permanentAddress" name="permanentAddress" rows="3" placeholder="Your Permanent Address" required></textarea>
+                </div>
+ 
+                <button type="submit" class="submit-button">Verify and Sign Up</button>
+            </form>
         </div>
-            </section>
+    </section>
+    </div>
 </body>
 </html>

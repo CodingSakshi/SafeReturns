@@ -1,18 +1,21 @@
 /* Ensure the body takes full viewport height and centers content */
 body {
-    margin: 0; /* Remove default margin */
-    font-family: "Roboto", sans-serif;
-    background-color: var(--bg-color);
-    display: flex; /* Enable Flexbox */
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
-    min-height: 100vh; /* Ensure body takes full viewport height */
-    box-sizing: border-box; /* Include padding and border in the height */
+    margin: 0;
+    /* font-family: inherit; */
+    /* background-color: var(--bg-color); */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
+
+
+.main-container {
+    display: flex;
+    justify-content: center;
+}
+
 
 /* Flexbox for centering the login form */
 .login-section {
-    background-color: var(--bg-color);
+    /* background-color: var(--bg-color); */
     padding: 40px 20px; /* Add some padding for smaller screens */
     text-align: center;
     width: 100%; /* Ensure it doesn't exceed the viewport width */
@@ -32,8 +35,8 @@ body {
 
 /* Additional styling for form elements */
 .login-form h2 {
-    font-family: "Roboto Condensed", sans-serif;
-    color: var(--h1-color);
+    font-family: inherit;
+    color: #fa6742; ;
     margin-bottom: 20px;
 }
 
@@ -66,7 +69,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-family: inherit;
+    font: inherit;
     width: 100%;
 }
 
@@ -104,6 +107,7 @@ a:hover {
 
 input {
     color: var(--p-color-from);
+    font-family: inherit;
 }
 
 input:focus {
