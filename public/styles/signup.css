@@ -133,19 +133,6 @@ textarea {
     text-align: left;
     font-size: 15px;
 }
-/* 
-.radio-group {
-    display: block;
-    justify-content: left;
-    flex-direction: column;
-}
-
-.radio-subgroup {
-    display: flex; 
-    justify-content: left;
-    flex-direction: row;
-    /* justify-content: center; 
-} */
 
 fieldset {
     overflow: hidden;

@@ -1,53 +1,165 @@
-.report-section{
-    display: flex;
-    justify-content:space-evenly;
-    align-items: center;
+/* General Styles */
+body {
+    margin: 0;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.main-container {
+    padding: 40px 20px;
     text-align: center;
-    margin: 30px;
-    margin-top: 60px;
 }
 
-.report-container {
-    width: 350px;
-    background-color: #fff;
-    padding: 35px;
-    /* margin: 20px; */
-
+/* Report Form Section */
+.report-section {
+    max-width: 600px;
+    margin: 0 auto;
     background-color: #ffffff;
-    padding: 20px 30px; /* Adjust padding */
+    padding: 20px 30px;
     border-radius: 10px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
     box-sizing: border-box;
+    margin-bottom: 40px;
 }
 
-
-.report-container h2 {
-    color: #fa6742; 
-    margin-bottom: 12px;
-    font-size: 25px;
-}
-
-/* .report-container h3 {
+.report-section h2 {
+    font-family: inherit;
     color: #fa6742;
-    margin-bottom: 8px;
-} */
+    margin-bottom: 3px;
+}
 
-.report-container p {
-    color: #6e7a8a; 
+.report-section p {
+    font: inherit;
+    color: #6e7a8a;
+    margin-bottom: 22px;
+    margin-top: 0;
+}
+
+.form-group, fieldset {
+    margin-bottom: 15px;
+}
+
+.form-group label, p.question-label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--p-color);
+    text-align: left;
+    font-size: 15px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    color: var(--p-color-from);
+    border-radius: 5px;
+    box-sizing: border-box;
+    font: inherit;
     font-size: 14px;
+    
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.submit-button {
+    background-color: #fa6742;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    font: inherit;
+}
+
+.submit-button:hover {
+    background-color: #f45730;
+}
+
+a {
+    color: #fa6742;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.warning {
+    color: rgb(150, 0, 0);
+    font-size: 14px;
+    text-align: left;
+    margin: 2px 0 5px 0;
+}
+
+input:focus, textarea:focus {
+    border: 1px solid var(--org-color);
+    outline: none;
+}
+
+/* Radio and Checkbox Styles */
+
+
+fieldset {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+}
+
+.radio-group, .checkbox{
+    float: left;
+    clear: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+.radio-group label, .checkbox label {
+    float: left;
+    clear: none;
+    display: block;
+    padding: 0px 1em 0px 8px;
+
     margin-bottom: 12px;
+    color: #52565b;
+    font-size: 15px;
+  }
+  
+  input[type="radio"],
+  input.radio, input[type="checkbox"], input.checkbox {
+    float: left;
+    clear: none;
+    margin: 2px 0 0 2px;
+  }
+
+/* File Input Styles */
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: var(--p-color);
+    font-family: inherit;
+    background-color: white;
 }
 
-.report-container a {
-  color: #2e475d;
-  font-family: "Lexend Deca", sans-serif;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  /* margin: 0 14px; */
-  font-size: 15px;
+input[type="file"]::file-selector-button {
+    background-color: #fa6742;
+    color: #fff;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: inherit;
+    margin-right: 8px;
 }
 
-.report-container a:hover {
-    /* text-decoration: underline; */
-  color: #fa6742;
+input[type="file"]::file-selector-button:hover {
+    background-color: #f45730;
 }

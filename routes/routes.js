@@ -2,8 +2,36 @@ const express = require('express');
 const db = require('../data/database');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const multer = require('multer');       // requiring multer
-const upload = multer({});            // making object using it
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const { exec } = require('child_process');
+const { constrainedMemory } = require('process');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const personStatus = req.body.personStatus;
+
+        let folder = 'images/';
+        if (personStatus === 'foundPerson') {
+            folder += 'found';
+        } else if (personStatus === 'missingPerson') {
+            folder += 'missing';
+        } 
+
+        if (!fs.existsSync(folder)) {
+            fs.mkdirSync(folder, { recursive: true });
+        }
+
+        cb(null, folder);  
+    },
+    filename: function (req, file, cb) {
+        // Use original file name or customize it if needed
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
 
 
 router.get('/', function(req, res) {
@@ -112,7 +140,6 @@ router.post('/signup', async function (req, res) {
         userType: userType
     };
     
-    
     try {
         await db.getDb().collection('users').insertOne(user);
         res.redirect('/login');
@@ -144,13 +171,44 @@ router.post('/login', async function(req, res) {
     })
 });
 
+
 router.post('/report', upload.single('image'), async function(req, res) {
+    const { personStatus, fullname, age, gender, lastSeen, additionalDetails, email, contactNumber, permanentAddress } = req.body;
+    const uploadedImageFile = req.file;  
+    const uploadedImageFilePath = (uploadedImageFile.destination) + ('/') + (uploadedImageFile.filename);;
 
-    const { personStatus, fullname, age, gender, lastSeen, additionalDetails, image, email, contactNumber, permanentAddress } = req.body;
-    const uploadedImageFile = req.file;
+    // below is path of main.py
+    exec(`D:\\SafeReturns\\.venv\\Scripts\\python.exe D:\\SafeReturns\\main.py ${uploadedImageFilePath}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing Python script: ${stderr}`);
+            return res.status(500).send('Internal server error while processing the image.');
+        }
 
+        if (stdout.trim() === 'True') {
+            // Save the report data to your database
+            // const reportData = {
+            //     personStatus,
+            //     fullname,
+            //     age,
+            //     gender,
+            //     lastSeen,
+            //     additionalDetails,
+            //     email,
+            //     contactNumber,
+            //     permanentAddress,
+            //     imagePath: uploadedImageFile.path   // Save the image path in DB
+            // };
 
+            console.log('Report submitted');
+
+            return res.send('Report submitted successfully!');
+        } else {
+            return res.status(400).send('Image does not meet the required criteria. Please upload a valid image.');
+        }
+    });
 });
+
+
 
 router.post('/logout', function (req, res) {
     req.session.user = null;
