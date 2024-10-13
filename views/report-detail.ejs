@@ -4,7 +4,7 @@
     <%- include("include/head", { title: 'Report Detail' }) %>
     <link href="/styles/report-detail.css" rel="stylesheet">
     <script src="/scripts/report-detail.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 </head>
 
 <body>
@@ -13,6 +13,7 @@
     <section class="section">
         <h1>Report Detail</h1>
         <!-- Individual Info Section -->
+        <div id="report-card">
         <div class="card">
             <h3>Individual Information</h3>
             <span class="lightweight">Reported At: <%= report.reportedAt.toDateString() %></span>
@@ -42,6 +43,7 @@
             </p>
         </div>
 
+
         <!-- Contact Info Section -->
         <div class="card">
             <h3>Contact Information</h3>
@@ -49,6 +51,7 @@
             <p><strong>Contact Number:</strong> <%= report.contactNumber %></p>
             <p><strong>Permanent Address:</strong> <%= report.permanentAddress %></p>
         </div>
+    </div>
 
         <div id="btns">
         <a href="/account/<%= user.username %>" id="back-button">Back to Account</a>
