@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include("include/head") %>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-
-    
-    <link href="/styles/common.css" rel="stylesheet">
+    <%- include("include/head", { title: 'Signup' }) %>
+   
     <link href="/styles/signup.css" rel="stylesheet">
-    <title>Signup</title>
-
 </head>
 <body>
     <%- include("include/nav") %>
@@ -42,17 +37,17 @@
                 <fieldset>
                     <p class="question-label">Type of User<span class="required">*</span></p>
                     <div class="radio-group">
-                        <input type="radio" name="userType" value="individual" id="individual" 
-                            <%= inputData.userType === 'individual' ? 'checked' : '' %> required> 
-                        <label for="individual">Individual</label> 
+                        <input type="radio" name="userType" value="Individual" id="Individual" 
+                            <%= inputData.userType === 'Individual' ? 'checked' : '' %> required> 
+                        <label for="Individual">Individual</label> 
                 
-                        <input type="radio" name="userType" value="ngo" id="NGO" 
-                            <%= inputData.userType === 'ngo' ? 'checked' : '' %> required> 
+                        <input type="radio" name="userType" value="NGO" id="NGO" 
+                            <%= inputData.userType === 'NGO' ? 'checked' : '' %> required> 
                         <label for="NGO">NGO</label> 
                 
-                        <input type="radio" name="userType" value="police" id="police-station" 
-                            <%= inputData.userType === 'police' ? 'checked' : '' %> required>
-                        <label for="police-station">Police Station</label>
+                        <input type="radio" name="userType" value="Police" id="Police" 
+                            <%= inputData.userType === 'Police' ? 'checked' : '' %> required>
+                        <label for="Police">Police</label>
                     </div>
                 </fieldset>
             

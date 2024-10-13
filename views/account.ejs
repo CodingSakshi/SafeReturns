@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("include/head", {title: 'Account'}) %>
+    
+    <link href="/styles/account.css" rel="stylesheet">
+</head>
+
+
+<body>
+    <%- include("include/nav") %>
+
+    <div id="user-info-wrapper">
+    <div id="user-info"> 
+       <h3>Username: <strong><%= user.username %></strong></h3>
+       <h3>Name: <strong><%= user.fullname %></strong></h3>
+       <h3>Type: <strong><%= user.userType %></strong></h3>
+    </div>
+  </div>
+
+    <main id="all-reports">
+        <% if(!reports || reports.length === 0)  { %>
+          <h1>No reports have been submitted yet. Be the first to make a difference!</h1>
+          <a class="btn" href="/report">Report a case!</a>
+        <% } else { %>
+          <h1>Your Reports</h1>
+          <ol id="report-lists"> 
+            <% for(const report of reports) { %> 
+              <li>
+                <%- include('include/report-item', { report: report }) %>
+              </li>
+            <% } %>
+          </ol>
+        <% } %>
+      </main> 
+
+</body>
+</html>

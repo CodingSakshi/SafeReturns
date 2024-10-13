@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("include/head", { title: 'Report Detail' }) %>
+    <link href="/styles/report-detail.css" rel="stylesheet">
+    <script src="/scripts/report-detail.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+</head>
+
+<body>
+    <%- include("include/nav") %>
+
+    <section class="section">
+        <h1>Report Detail</h1>
+        <!-- Individual Info Section -->
+        <div class="card">
+            <h3>Individual Information</h3>
+            <span class="lightweight">Reported At: <%= report.reportedAt.toDateString() %></span>
+            <div class="container">
+            <div class="sub-container">
+            <p><strong>Full Name:</strong> <%= report.fullname %></p>
+            <p><strong>Status:</strong> <%= report.personStatus %></p>
+            <p><strong>Age:</strong> <%= report.age %></p>
+            <p><strong>Gender:</strong> <%= report.gender %></p>
+            <p class="additional-details"><strong>Additional Details:</strong> <%= report.additionalDetails %></p>
+
+            </div>
+            <div class="sub-container">
+            <img src="<%= report.imagePath %>" alt="Report Image" class="report-image">
+            </div>
+            </div>
+            <p class="matched-with">
+                <strong>Matched With:</strong> 
+                <% if (report.matchedWith) { %>
+                    <p class="precaution">
+                        <a href="<%= report.matchedWith %>">View Matched Profile</a>
+                        <em>Note: The match is based on facial recognition technology, which may not guarantee 100% accuracy. Please verify the matches and ensure they are correct. We aim to assist you in reconnecting with loved ones, but cross-checking is essential.</em>
+                    </p>
+                <% } else { %>
+                    No matched found for now
+                <% } %>
+            </p>
+        </div>
+
+        <!-- Contact Info Section -->
+        <div class="card">
+            <h3>Contact Information</h3>
+            <p><strong>Email:</strong> <%= report.email %></p>
+            <p><strong>Contact Number:</strong> <%= report.contactNumber %></p>
+            <p><strong>Permanent Address:</strong> <%= report.permanentAddress %></p>
+        </div>
+
+        <div id="btns">
+        <a href="/account/<%= user.username %>" id="back-button">Back to Account</a>
+        <a href="javascript:void(0);" id="download-button">Download Report</a>
+        </div>
+
+        <script>
+            // Embed the report data from backend into a JS object
+            const report = {
+                fullname: "<%= report.fullname %>",
+                personStatus: "<%= report.personStatus %>",
+                age: "<%= report.age %>",
+                gender: "<%= report.gender %>",
+                additionalDetails: "<%= report.additionalDetails %>",
+                email: "<%= report.email %>",
+                contactNumber: "<%= report.contactNumber %>",
+                permanentAddress: "<%= report.permanentAddress %>"
+            };
+        </script>
+    </section>
+
+</body>
+</html>

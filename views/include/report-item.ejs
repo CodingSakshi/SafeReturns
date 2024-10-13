@@ -1,0 +1,17 @@
+<article class="report-item">
+    <h2>Name: <%= report.fullname %></h2>
+    <% if(report.personStatus === 'foundPerson')  { %>
+        <p class="item-status">Status: Found Person %></p>
+    <% } else { %> 
+        <p class="item-status">Status: Missing Person %></p>
+    <% }  %>
+
+    <p class="item-date">Reported At: <%= new Date(report.reportedAt).toLocaleDateString() %></p>
+    <div class="report-actions">
+      <form action="/report/<%= report._id %>/delete" method="report">
+        <button class="btn btn-alt">Delete report</button>
+      </form>
+      <a href="/report-detail/<%= report._id %>/edit">Edit report</a>
+      <a class="btn" href="/account/report/<%= report._id %>">View report</a>
+    </div>
+  </article>

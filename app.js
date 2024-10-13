@@ -21,6 +21,8 @@ app.set('views', path.join(__dirname, 'views'));
 // Middlewares
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: false}));             // To parse form data
+app.use('/images', express.static('images'));  // (For serving files of image folder) Here it will include only serve req with path /images, but to the client it will only pass /imagename.png and not /image/imagename.png
+
 
 // Session middlewares
 app.use(express.static('public'));
@@ -32,12 +34,16 @@ app.use(session({
   store: sessionStore
 }));
 
-app.use(function(req, res, next) {                                       // custom middleware that sets a local variable (isAuthenticated) for all templates rendered during the request/response cycle
-  res.locals.isAuthenticated = req.session.isAuthenticated || false;     
+app.use(function(req, res, next) {                                       // custom middleware that sets a local variable (isAuthenticated) for all templates rendered during the request/response cycle 
+  res.locals.isAuthenticated = req.session.isAuthenticated || false;
+  res.locals.user = req.session.user || null;
   next();
 });
 
-
+app.use(function (error, req, res, next) {
+  console.log(error);
+  res.status(500).render('500');
+});
 
 // Routes
 app.use(demoRoutes);

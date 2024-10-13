@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include("include/head") %>
+    <%- include("include/head", { title: '500' }) %>
     
-    <link href="/styles/common.css" rel="stylesheet">
     <link href="/styles/error.css" rel="stylesheet">
-    <script src="/scripts/navbar.js" defer></script> 
-    <title>500</title>
 </head>
 <body>
     <%- include("include/nav") %>
 
         <div class="error-container">
             <h1>500</h1>
-            <h3>Internal Server Error :]</h3>
+            <h3>Internal Server Error :[</h3>
             <p>Oops! Something went wrong on our end. We're working to fix it.</p>
         </div>
     

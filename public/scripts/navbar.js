@@ -1,15 +1,22 @@
-// for active links
 const activePage = window.location.pathname;
 const navLinks = document.querySelectorAll('nav a');
 
-navLinks.forEach(link => {
-    const linkPath = new URL(link.href).pathname; // Get the link's path
+// Determine if the current page is an account report detail page
+const isAccountReportDetailPage = activePage.startsWith('/account/report/');
 
-    // Check for exact match for the homepage
-    if (activePage === '/' && linkPath === '/') {
+navLinks.forEach(link => {
+    // Get the href attribute of the link and remove any query/fragment
+    const linkPath = link.getAttribute('href').split('?')[0].split('#')[0];
+
+    // Custom logic for activating 'Account' for '/account/report-detail/:id'
+    if (isAccountReportDetailPage && linkPath.startsWith('/account/')) {
         link.classList.add('active');
     } 
-    // Check if the link's path is a sub-path of the current page
+    // Check for exact match for the homepage
+    else if (activePage === '/' && linkPath === '/') {
+        link.classList.add('active');
+    } 
+    // Default behavior: Check if the link's path is a sub-path of the current page
     else if (activePage.startsWith(linkPath) && linkPath !== '/') {
         link.classList.add('active');
     }

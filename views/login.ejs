@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include("include/head") %>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <%- include("include/head", { title: 'Login' }) %>
 
-    <link href="/styles/common.css" rel="stylesheet">
     <link href="/styles/login.css" rel="stylesheet">
-    <script src="/scripts/navbar.js" defer></script>
-    <title>Login</title>
 </head>
 <body>
     <%- include("include/nav") %>
@@ -23,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required minlength="6">
+                        <input type="password" id="password" name="password" required>
                     </div>
                     <% if (error) { %>
                         <p class="password-warning">⚠️ <%= error %></p>

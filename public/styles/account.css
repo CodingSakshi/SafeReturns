@@ -1,0 +1,170 @@
+/* All reports page */
+
+
+html {
+    font-family: 'Lexend Deca', serif;
+}
+  
+body {
+    margin: 0;
+    /* background-color: white; */
+}
+
+#user-info-wrapper {
+    display: flex;
+    justify-content: center; /* Center the flex container horizontally */
+    margin: 20px 0 30px 0; /* Add margin around the container */
+}
+
+#user-info {
+    display: flex; /* Use flexbox for horizontal alignment */
+    flex-direction: row; /* Align items in a row */
+    justify-content: center; /* Center the content */
+    color: #5f7087;
+    /* border-bottom: 0.1px solid #afb7c3; */
+    padding: 0; /* Remove any extra padding */
+}
+
+/* Optional: Add spacing between each item */
+#user-info > * {
+    margin: 0 15px; /* Space between items */
+}
+
+
+#user-info h3 {
+    margin: 0 20px;
+    font-size: 16px;
+}
+  
+main {
+    width: 55%;
+    margin: 3rem auto;
+    margin-top: 10px;
+}
+  
+a {
+    text-decoration: none;
+    color: #fa6742;
+}
+  
+  a:hover,
+  a:active {
+    text-decoration: underline;
+  }
+  
+  ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Global components */
+  
+  .btn {
+    cursor: pointer;
+    font: inherit;
+    background-color: #fa6742;
+    text-decoration: none;
+    border: none;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+  }
+  
+  .btn:hover,
+  .btn:active {
+    background-color: #f45730;
+    text-decoration: none;
+    border-color: none;
+    color: white;
+  }
+  
+  .btn.btn-alt {
+    background-color: transparent; 
+    border-color: transparent;
+    color: #fa6742;
+  }
+  
+  .btn.btn-alt:hover,
+  .btn.btn-alt:active {
+    text-decoration: underline;
+  }
+
+#all-reports {
+    text-align: center;
+  }
+
+  #all-reports h1 {
+    font-size: 22px;
+    color: #fa6742;
+    margin-bottom: 10px;
+  }
+  
+  #reports-list {
+    margin: 3rem auto;
+    max-width: 40rem;
+  }
+  
+  .report-item {
+    margin: 1rem 0;
+    border: 0.1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: white;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+  
+  .report-item h2 {
+    margin: 0.5rem 0;
+    color: #2e475d;
+    font-size: 23px;
+  }
+
+  .report-item p {
+    margin: 0.5rem 0;
+    color: #6e7a8a;
+  }
+  
+  .item-status {
+    font-weight: 700;
+  }
+
+  .item-date {
+    font-size: 15px;
+  }
+  
+  .report-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .report-actions .btn-alt {
+    padding: 0;
+  }
+
+  #no-reports {
+    margin-top: 30px;
+  }
+  
+  /* report detail page */
+  
+  #report-meta {
+    color: rgb(156, 149, 149);
+  }
+  
+  #report-meta address {
+    display: inline;
+  }
+  
+  #report-meta time {
+    font-style: italic;
+  }
+  
+  #body {
+    white-space: pre-wrap; /* This ensures that line breaks and whitespace are kept */
+  }
+
