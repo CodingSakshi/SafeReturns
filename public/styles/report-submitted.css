@@ -31,13 +31,6 @@ body {
     justify-content: center;
 }
 
-
-
-
-
- 
-
-
 /* Button styling */
 .btn {
     background-color: #fa6742;
@@ -51,6 +44,8 @@ body {
     transition: background-color 0.3s ease;
     font-family: inherit;
     cursor: pointer;
+    width: 150px;
+
 }
 
 .btn:hover {

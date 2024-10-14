@@ -18,13 +18,13 @@ const storage = multer.diskStorage({
 
         let folder = 'images/';
         if (personStatus === 'Found Person') {
-            console.log('Found')
+            console.log('Found folder')
             folder += 'found';
         } else if (personStatus === 'Missing Person') {
-            console.log('Missing')
+            console.log('Missing folder')
             folder += 'missing';
         } else {
-            console.log('Temp');
+            console.log('Temp folder');
             folder += 'temporary';
         }
 
@@ -317,6 +317,8 @@ console.log(uploadedImageFilePath);
 
 router.post('/verify-image', upload.single('image'), function(req, res) {
     const uploadedImageFile = req.file;
+    const personStatus = req.body.personStatus;
+
     const uploadedImageFilePath = (uploadedImageFile.destination) + ('/') + (uploadedImageFile.filename);
     exec(`D:\\SafeReturns\\.venv\\Scripts\\python.exe D:\\SafeReturns\\main.py ${uploadedImageFilePath}`, (error, stdout, stderr) => {
         if (error) {
