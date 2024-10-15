@@ -318,6 +318,7 @@ console.log(uploadedImageFilePath);
 router.post('/verify-image', upload.single('image'), function(req, res) {
     const uploadedImageFile = req.file;
     const personStatus = req.body.personStatus;
+    console.log(personStatus)
 
     const uploadedImageFilePath = (uploadedImageFile.destination) + ('/') + (uploadedImageFile.filename);
     exec(`D:\\SafeReturns\\.venv\\Scripts\\python.exe D:\\SafeReturns\\main.py ${uploadedImageFilePath}`, (error, stdout, stderr) => {

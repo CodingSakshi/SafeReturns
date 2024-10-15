@@ -2,7 +2,7 @@ document.getElementById('verifyButton').addEventListener('click', function() {
     const imageInput = document.getElementById('image');
     const warningMessage = document.getElementById('warningMessage'); // Fixing the reference
     const submitButton = document.getElementById('submitButton');
-    // const personStatus = document.querySelector('input[name="personStatus"]:checked');
+    const personStatus = document.querySelector('input[name="personStatus"]:checked');
   
     // Clear the message first
     warningMessage.textContent = '';
@@ -13,18 +13,19 @@ document.getElementById('verifyButton').addEventListener('click', function() {
       return;
     }
 
-    // if (!personStatus) {
-    //   warningMessage.textContent = "⚠️ Please select person status!";
-    //   warningMessage.style.color = 'red';
-    //   return; 
-    // }
+    if (!personStatus) {
+      warningMessage.textContent = "⚠️ Please select person status!";
+      warningMessage.style.color = 'red';
+      return; 
+    }
 
     verifyButton.disabled = true;
     verifyButton.textContent = "Verifying..."
   
     const formData = new FormData();
     formData.append('image', imageInput.files[0]);       // sending image and person status at backend for verification
-    // formData.append('personStatus', personStatus.value);
+    formData.append('personStatus', personStatus.value);
+    alert(personStatus.value)
   
     // Send image to server for verification
     fetch('/verify-image', {
