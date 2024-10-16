@@ -29,7 +29,8 @@ body {
     background-color: #ffffff;
     padding: 20px 30px; /* Adjust padding */
     border-radius: 10px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    
     box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
 

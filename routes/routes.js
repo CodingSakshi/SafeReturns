@@ -172,7 +172,7 @@ router.get('/technologies', function(req, res) {
     res.render('technologies'); 
 });
 
-router.get('/contact-us', function(req, res) {
+router.get('/contact', function(req, res) {
     res.render('contact-us'); 
 });
 

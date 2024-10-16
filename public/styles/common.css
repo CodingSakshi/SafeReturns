@@ -27,7 +27,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #eaf0f6;
+  border-bottom: 1px solid #dce1e6;
   padding: 0 100px;
   position: relative;
 }

@@ -168,3 +168,16 @@ a {
     white-space: pre-wrap; /* This ensures that line breaks and whitespace are kept */
   }
 
+  .matched-with a {
+    color: #2e475d;
+    font-family: "Lexend Deca", sans-serif;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    margin: 0 1px;
+    font-size: 15px;
+  }
+  
+  .matched-with a:hover {
+      /* text-decoration: underline; */
+      color: #fa6742;
+  }
