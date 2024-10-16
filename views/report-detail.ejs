@@ -33,8 +33,8 @@
             <p class="matched-with">
                 <strong>Matched With:</strong> 
                 <% if (report.matchedWith) { %>
+                    <a href="<%= report.matchedWith %>" target="_blank">View Matched Profile</a>
                     <p class="precaution">
-                        <a href="<%= report.matchedWith %>">View Matched Profile</a>
                         <em>Note: The match is based on facial recognition technology, which may not guarantee 100% accuracy. Please verify the matches and ensure they are correct. We aim to assist you in reconnecting with loved ones, but cross-checking is essential.</em>
                     </p>
                 <% } else { %>

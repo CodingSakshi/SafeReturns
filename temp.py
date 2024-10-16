@@ -9,8 +9,13 @@ def main(arg1, arg2):
 
     if arg2 == 'Found Person':
         folder = 'images/missing'
+        result2 = fs.match_faces(arg1, folder)
+    elif arg2 == 'Missing Person':
+        folder = 'images/found'
+        result2 = fs.match_faces(arg1, folder)
+    else:
+        result2 = False
     
-    result2 = fs.match_faces(arg1, folder)
     
     # Return results as output
     return result1, result2

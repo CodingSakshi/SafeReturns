@@ -8,14 +8,17 @@
 <body>
     <%- include("include/nav") %>
 
-        <div class="container">
-            <h1>Report Submitted Successfully!</h1>
-            <h3>Thank you for your submission</h3>
-            <p>We've received your details. You can check your account for updates on potential matches.</p>
-        </div>
 
-        <div class="cta-buttons"></div>
+        <div class="container">
+            <h1>Potential Match Found!</h1>
+            <h3>Thank you for your submission</h3>
+            <p>We've found a potential match based on the details you provided. Please verify if this is the same person.</p>
+            <p>You can view the match and verify it in your account section.</p>
+        </div>
+        <div class="cta-buttons">
+            <a href="/account/<%= user.username %>" class="btn" style="margin-right: 10px;">View Match in Account</a>
             <a href="/report" class="btn" style="margin-right: 10px;">Submit Another Report</a>
+
         </div>
     
 </body>

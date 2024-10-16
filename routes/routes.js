@@ -7,10 +7,11 @@ const bcrypt = require('bcryptjs');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 
 const { v4: uuidv4 } = require('uuid');
 const { sourceMapsEnabled } = require('process');
+const { match } = require('assert');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -92,6 +93,20 @@ router.get('/report-submitted', function(req, res) {
     res.render('report-submitted'); 
 });
 
+
+router.get('/report-submitted-found', function(req, res) {
+    if(!req.session.isAuthenticated) {          // if(!req.session.user)
+        return res.status(401).render('401');
+    }
+    if (!req.session.reportSubmitted) {
+        return res.redirect('/report');  
+    }
+    
+    req.session.reportSubmitted = false;
+    res.render('report-submitted-found'); 
+});
+
+
 router.get('/account/:username', async function(req, res) {  // Dynamically captures username from URL
     if (!req.session.isAuthenticated) {  // Check if the user is authenticated
         return res.status(401).render('401');
@@ -127,7 +142,7 @@ router.get('/account/:username', async function(req, res) {  // Dynamically capt
 });
 
 
-router.get('/account/report/:id', async function(req, res, next) {
+router.get('/report/:id', async function(req, res, next) {
     if (!req.session.isAuthenticated) {  
         return res.status(401).render('401');
     }
@@ -249,18 +264,43 @@ router.post('/login', async function(req, res) {
 
 
 router.post('/report', upload.single('image'), async function(req, res) {
+    let isMatched = false;
+    let { matchedWith } = req.body;
     const { personStatus, fullname, age, gender, additionalDetails, email, contactNumber, permanentAddress } = req.body;
     const uploadedImageFile = req.file;
 
     // Check if image file is uploaded
-    if (!uploadedImageFile) {
-        return res.status(400).send('Image file is required.');
-    }
+    // if (!uploadedImageFile) {
+    //     return res.status(400).send('Image file is required.');
+    // }
+
     const uploadedImageFilePath = ('/') + (uploadedImageFile.destination) + ('/') + (uploadedImageFile.filename);
-console.log(uploadedImageFilePath);
-    
-    // Create a new unique ID for the image
+    // Create a new unique ID for the report
     const uniqueId = path.basename(uploadedImageFile.filename, path.extname(uploadedImageFile.filename));
+
+    if (matchedWith !== '') {
+        const matchedUser = await db.getDb().collection('reports').findOne({ _id: matchedWith });
+        console.log(matchedUser); // Log the matched user document
+    
+        // Now you can update the email
+        // const newEmail = 'newemail@example.com'; // Replace with the new email you want to set
+        const result = await db.getDb().collection('reports').updateOne(
+            { _id: matchedWith }, // Query to find the document to update
+            { $set: { matchedWith: uniqueId } } // The update operation to set the new email
+        );
+    
+        if (result.modifiedCount > 0) {
+            console.log('Email updated successfully');
+            isMatched = true;
+        } else {
+            console.log('No documents were updated');
+            isMatched = false;
+        }
+    }
+
+
+    
+
 
     // Save the report data to your database with the unique ID as the _id
     const reportData = {
@@ -275,7 +315,7 @@ console.log(uploadedImageFilePath);
         contactNumber,
         permanentAddress,
         imagePath: uploadedImageFilePath,
-        matchedWith: '',
+        matchedWith: matchedWith,
         reportedAt: new Date()
     };
 
@@ -283,7 +323,6 @@ console.log(uploadedImageFilePath);
     try {
         // Insert report data into the database
         await db.getDb().collection('reports').insertOne(reportData);
-        console.log('Report submitted');
 
         // Update the user document to add the report ID to the user's reports array
         const userUpdateResult = await db.getDb()
@@ -303,7 +342,11 @@ console.log(uploadedImageFilePath);
         }
 
         req.session.reportSubmitted = true; // Mark report as submitted
-        res.redirect('/report-submitted');
+        console.log('Report submitted');
+        if(isMatched == true) {
+            return res.redirect('/report-submitted-found');
+        }
+        return res.redirect('/report-submitted');
     } catch (err) {
         console.error(err);
         // Handle error: delete the report if insertion fails
@@ -321,23 +364,60 @@ router.post('/verify-image', upload.single('image'), function(req, res) {
     console.log(personStatus)
 
     const uploadedImageFilePath = (uploadedImageFile.destination) + ('/') + (uploadedImageFile.filename);
-    exec(`D:\\SafeReturns\\.venv\\Scripts\\python.exe D:\\SafeReturns\\main.py ${uploadedImageFilePath}`, (error, stdout, stderr) => {
-        if (error) {
-            console.error(`Error executing Python script: ${stderr}`);
-            return res.status(500).json({ message: 'Error while verifying the image' });
-        }
+    
+    
+    // Defining the arguments to pass to the Python script
+    const arg1 = uploadedImageFilePath;
+    const arg2 = personStatus;
 
+    // Spawn the Python process
+    const pythonProcess = spawn('python', ['temp.py', arg1, arg2]);
+
+    // Variables to hold the output from Python
+    let fullOutput = '';  // Store full output as a string
+
+    // Handle output from the Python script
+    pythonProcess.stdout.on('data', (data) => {
+        // Collect full output data (could arrive in chunks)
+        fullOutput += data.toString();
+    });
+
+    // Handle errors from the Python script
+    pythonProcess.stderr.on('data', (data) => {
+        console.error(`Python Error: ${data}`);
+    });
+
+
+    // Handle when the Python process exits
+    pythonProcess.on('exit', (code) => {
+        console.log(`Python process exited with code ${code}`);
+        
+        // Split the full output by new lines
+        const outputLines = fullOutput.trim().split('\n');
+    
+        // Assign output lines to x and y, if available
+        if (outputLines.length >= 2) {
+            const detect_face = outputLines[0]; // First line of output
+            const match_face = outputLines[1]; // Second line of output
+            console.log(`Detect Face: ${detect_face}`);
+            console.log(`Match Face: ${match_face}`);
+            return res.json({ detect_face, match_face });
+        } else {
+            console.error('Not enough output from Python script.');
+            return res.status(500).json({ message: 'Error processing the image.' });
+        }
+    });
+
+    // Ensure the image is deleted after processing
+    pythonProcess.on('exit', (code) => {
+        // Delete the uploaded image file regardless of the Python script success
         fs.unlink(uploadedImageFilePath, (err) => {
             if (err) {
                 console.error(`Error deleting the image: ${err}`);
+            } else {
+                console.log('Uploaded image deleted successfully.');
             }
         });
-
-        if (stdout.trim() === 'True') {
-            return res.json({ verified: true });
-        } else {
-            return res.json({ verified: false });
-        }
     });
 });
 

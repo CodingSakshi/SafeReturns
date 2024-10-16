@@ -3,6 +3,7 @@ document.getElementById('verifyButton').addEventListener('click', function() {
     const warningMessage = document.getElementById('warningMessage'); // Fixing the reference
     const submitButton = document.getElementById('submitButton');
     const personStatus = document.querySelector('input[name="personStatus"]:checked');
+    const matchedWith = document.getElementById('matchedWith');
   
     // Clear the message first
     warningMessage.textContent = '';
@@ -25,7 +26,7 @@ document.getElementById('verifyButton').addEventListener('click', function() {
     const formData = new FormData();
     formData.append('image', imageInput.files[0]);       // sending image and person status at backend for verification
     formData.append('personStatus', personStatus.value);
-    alert(personStatus.value)
+    // alert(personStatus.value)
   
     // Send image to server for verification
     fetch('/verify-image', {
@@ -34,7 +35,17 @@ document.getElementById('verifyButton').addEventListener('click', function() {
     })
     .then(response => response.json())
     .then(data => {
-      if (data.verified) {
+      if(data.match_face == 'False') {
+        // alert(data.match_face);
+        matchedWith.value = '';
+      }
+      else {
+        matchedWith.value = data.match_face;
+        // alert('wow')
+        // alert(matchedWith.value)
+      }
+
+      if (data.detect_face) {
         verifyButton.textContent = "Verified";
         submitButton.disabled = false;  // Enable the submit button
       } else {
