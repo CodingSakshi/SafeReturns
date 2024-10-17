@@ -142,7 +142,7 @@ router.get('/account/:username', async function(req, res) {  // Dynamically capt
 });
 
 
-router.get('/report/:id', async function(req, res, next) {
+router.get('/account/report/:id', async function(req, res, next) {
     if (!req.session.isAuthenticated) {  
         return res.status(401).render('401');
     }
@@ -371,7 +371,7 @@ router.post('/verify-image', upload.single('image'), function(req, res) {
     const arg2 = personStatus;
 
     // Spawn the Python process
-    const pythonProcess = spawn('python', ['temp.py', arg1, arg2]);
+    const pythonProcess = spawn('python', ['main.py', arg1, arg2]);
 
     // Variables to hold the output from Python
     let fullOutput = '';  // Store full output as a string

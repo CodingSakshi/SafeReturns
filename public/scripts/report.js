@@ -41,18 +41,20 @@ document.getElementById('verifyButton').addEventListener('click', function() {
       }
       else {
         matchedWith.value = data.match_face;
-        // alert('wow')
         // alert(matchedWith.value)
       }
 
-      if (data.detect_face) {
-        verifyButton.textContent = "Verified";
-        submitButton.disabled = false;  // Enable the submit button
-      } else {
+      // alert(typeof data.detect_face);
+
+      if (data.detect_face === 'False')  {                            // a bug here
         warningMessage.textContent = "⚠️ Select a valid image!";
         verifyButton.textContent = "Verify Image"
         submitButton.disabled = true;   // Keep the submit button disabled
-      }
+      } 
+      else {
+        verifyButton.textContent = "Verified";
+        submitButton.disabled = false;  // Enable the submit button
+      } 
       verifyButton.disabled = false;
     })
     .catch(error => {
